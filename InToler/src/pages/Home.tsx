@@ -99,7 +99,7 @@ function Home() {
     >
       {showTitle && (
         <h1
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-8xl opacity-60 animate-fadeInOut size-max"
+          className="absolute top-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-8xl opacity-70 animate-fadeInOut size-max"
         >
           ¡Reservation In-Toler!
         </h1>

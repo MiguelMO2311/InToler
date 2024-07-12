@@ -15,8 +15,8 @@ const Footer = () => {
             <a className="text-4xl hover:bg-yellow-500" href="https://www.x.com" target="_blank" rel="noopener noreferrer"><AiFillTwitterSquare /></a>
             <a className="text-4xl hover:bg-yellow-500" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><BsInstagram /></a>
             <a className="text-4xl hover:bg-yellow-500" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"> <FaFacebookSquare /></a>
-            <a className="text-4xl hover:bg-yellow-500" href="https://www.amazon.es/s?k=libros" target="_blank" rel="noopener noreferrer"><IoLogoAmazon /></a>
-            <a className="text-4xl hover:bg-yellow-500" href="https://www.youtube.com/results?search_query=libros" target="_blank" rel="noopener noreferrer"><ImYoutube2 /></a>
+            <a className="text-4xl hover:bg-yellow-500" href="https://www.amazon.es/s?k=restaurante+estrella+michelin&crid=3KMYEJTMXHFX2&sprefix=restaurante+estrella+michelin%2Caps%2C77&ref=nb_sb_ss_ts-doa-p_1_29" target="_blank" rel="noopener noreferrer"><IoLogoAmazon /></a>
+            <a className="text-4xl hover:bg-yellow-500" href="https://www.youtube.com/results?search_query=libros+de+gastronomia+" target="_blank" rel="noopener noreferrer"><ImYoutube2 /></a>
         </footer>
     );
 };
