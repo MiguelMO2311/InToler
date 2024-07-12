@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Esquema de validación para el formulario
-const bookSchema = z.object({
+const cardSchema = z.object({
 
   title: z.string().min(1, 'El título es requerido.'),
   author: z.string().min(1, 'El autor es requerido.'),
@@ -18,12 +18,12 @@ const bookSchema = z.object({
 });
 
 // Tipo de datos para el formulario
-type FormData = z.infer<typeof bookSchema>;
+type FormData = z.infer<typeof cardSchema>;
 
-const EditBook: React.FC = () => {
+const EditCard: React.FC = () => {
   const navigate = useNavigate();
-  const { book_id } = useParams<{ book_id: string }>();
-  console.log(book_id);
+  const { card_id } = useParams<{ card_id: string }>();
+  console.log(card_id);
 
 
   const {
@@ -32,13 +32,13 @@ const EditBook: React.FC = () => {
     formState: { errors },
     setValue,
   } = useForm<FormData>({
-    resolver: zodResolver(bookSchema),
+    resolver: zodResolver(cardSchema),
   });
 
   useEffect(() => {
-    const fetchBookData = async () => {
+    const fetchCardData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/books/book/${book_id}`);
+        const response = await axios.get(`http://localhost:3000/cards/card/${card_id}`);
         const { title, author, photo, type, price } = response.data;
         setValue('title', title);
         setValue('author', author);
@@ -50,38 +50,38 @@ const EditBook: React.FC = () => {
       }
     };
 
-    fetchBookData();
-  }, [setValue, book_id]);
+    fetchCardData();
+  }, [setValue, card_id]);
 
 
   const onSubmit = async (data: FormData) => {
     console.log('onSubmit ejecutado', data);
     const updatedData = {
       ...data,
-      book_id: Number(data), // Convierte book_id a un número
+      card_id: Number(data), // Convierte book_id a un número
       price: parseFloat(data.price.toString()),
     };
     console.log('Datos enviados:', updatedData);
 
-    await axios.put(`http://localhost:3000/books/book/${book_id}`, updatedData)
+    await axios.put(`http://localhost:3000/cards/card/${card_id}`, updatedData)
       .then(() => {
-        console.log('Libro actualizado con éxito');
-        toast.success('Libro editado actualizado', { position: "top-center", autoClose: 2000 });
+        console.log('Tarjeta actualizada con éxito');
+        toast.success('Tarjete editada actualizada', { position: "top-center", autoClose: 2000 });
         setTimeout(() => {
-          navigate('/BooksPage');
+          navigate('/CardsPage');
         }, 3000);
       })
       .catch(error => {
-        console.error('Error al actualizar el libro:', error);
-        toast.error('Libro editado NO actualizado', { position: "top-center", autoClose: 2000 });
+        console.error('Error al actualizar la tarjeta:', error);
+        toast.error('Tarjeta editada NO actualizada', { position: "top-center", autoClose: 2000 });
       });
 
   };
   return (
-    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_addBook.jpg')", backgroundSize: 'cover', maxHeight: "550px" }}>
+    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_addCard.jpg')", backgroundSize: 'cover', maxHeight: "550px" }}>
       <div className="flex justify-center items-start pt-5 my-5 border-dashed h-1/3">
         <div className="w-2/3 shadow-md rounded px-8 pt-6 pb-8 mb-4  hover:bg-green-800 hover:bg-opacity-50 ">
-          <h1 className="text-2xl font-bold m-1 text-slate-800 hover:text-lime-200">Editar Libro</h1>
+          <h1 className="text-2xl font-bold m-1 text-slate-800 hover:text-lime-200">Editar Tarjeta</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
             <div className="mb-2">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
@@ -154,7 +154,7 @@ const EditBook: React.FC = () => {
                 className="bg-yellow-700 hover:bg-yellow-950 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline float-right mt-5"
                 type="submit"
               >
-                Editar Libro
+                Editar Tarjeta
               </button>
             </div>
           </form>
@@ -164,4 +164,4 @@ const EditBook: React.FC = () => {
   );
 };
 
-export default EditBook;
+export default EditCard;

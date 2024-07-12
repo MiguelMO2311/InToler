@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { Card } from '../models/Card';
 
-const CardCreation: React.FC = () => {
+const CardsPage: React.FC = () => {
   const [userCards, setUserCards] = useState<Card[]>([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const CardCreation: React.FC = () => {
     }
     const userId = Number(userInfo.user_id);
 
-    axios.get(`http://localhost:3000/books/${userId}`)
+    axios.get(`http://localhost:3000/cards/${userId}`)
       .then(response => {
         const cardsData = Array.isArray(response.data) ? response.data : [];
         console.log('Respuesta de la API:', cardsData);
@@ -59,7 +59,7 @@ const CardCreation: React.FC = () => {
 
 const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void }> = ({ card, handleDelete }) => {
   return (
-    <div className="flex flex-col bg-green-200 shadow-lg rounded-md overflow-hidden" style={{ height: '500px' }}>
+    <div className="flex flex-col bg-yellow-100 shadow-lg rounded-md overflow-hidden" style={{ height: '500px' }}>
       <div className="h-[400px] flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url(${card.photo})` }}>
       </div>
       <div className="p-4 flex-grow h-24">
@@ -72,7 +72,7 @@ const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void
         <div className="text-lg font-bold">{card.intolerances}</div>
         <div>
           <FaPencilAlt className="inline-block text-lime-500 hover:text-yellow-500 cursor-pointer"
-            onClick={() => window.location.href = `./edit-book/${card.card_id}`} />
+            onClick={() => window.location.href = `./edit-card/${card.card_id}`} />
           <FaTrash className="inline-block text-red-700 hover:text-red-400 cursor-pointer ml-2"
             onClick={() => handleDelete(card.card_id)} />
         </div>
@@ -81,4 +81,4 @@ const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void
   );
 };
 
-export default CardCreation;
+export default CardsPage;

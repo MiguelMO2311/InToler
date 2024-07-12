@@ -77,7 +77,7 @@ const LogIn: React.FC = () => {
           localStorage.setItem('userInfo', JSON.stringify(response.data.user));
           toast.success('Usuario Logueado con éxito!', { position: 'top-center', autoClose: 2000 });
           setTimeout(() => {
-            navigate('/BooksPage');
+            navigate('/CardPage');
           }, 3000);
         })
         .catch(error => {

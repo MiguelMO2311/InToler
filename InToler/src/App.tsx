@@ -12,7 +12,7 @@ import Reservation from './pages/Reservation';
 import Help from './pages/Help';
 import PublicRoutes from './components/PublicRoutes';
 import PrivateRoutes from './components/PrivateRoutes';
-import CardCreation from './pages/CardCreation';
+import CardCreation from './pages/CardsPage';
 
 function App() {
   return (
