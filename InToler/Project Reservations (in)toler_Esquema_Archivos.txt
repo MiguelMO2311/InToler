@@ -1,0 +1,52 @@
+Project: Reservations (in)toler
+|
+|-- src/
+|   |-- pages/
+|   |   |-- Register/
+|   |   |   |-- Register.tsx
+|   |   |   |-- Register.module.css
+|   |   |-- Login/
+|   |   |   |-- Login.tsx
+|   |   |   |-- Login.module.css
+|   |   |-- CardCreation/
+|   |   |   |-- CardCreation.tsx
+|   |   |   |-- CardCreation.module.css
+|   |   |-- Reservations/
+|   |   |   |-- Reservations.tsx
+|   |   |   |-- Reservations.module.css
+|   |   |-- Profile/
+|   |   |   |-- Profile.tsx
+|   |   |   |-- Profile.module.css
+|   |   |-- Help/
+|   |   |   |-- Help.tsx
+|   |   |   |-- Help.module.css
+|   |-- components/
+|   |   |-- Header/
+|   |   |   |-- Header.tsx
+|   |   |   |-- Header.module.css
+|   |   |-- Footer/
+|   |   |   |-- Footer.tsx
+|   |   |   |-- Footer.module.css
+|   |   |-- Card/
+|   |   |   |-- Card.tsx
+|   |   |   |-- Card.module.css
+|   |-- services/
+|   |   |-- theForkAPI.ts
+|   |-- assets/
+|   |   |-- images/
+|   |-- App.tsx
+|   |-- index.tsx
+|-- server/
+|   |-- api/
+|   |   |-- users/
+|   |   |   |-- index.ts
+|   |   |-- cards/
+|   |   |   |-- index.ts
+|   |   |-- reservations/
+|   |   |   |-- index.ts
+|-- db/
+|   |-- schema.sql
+|-- package.json
+|-- tsconfig.json
+|-- tailwind.config.js
+|-- postcss.config.js
