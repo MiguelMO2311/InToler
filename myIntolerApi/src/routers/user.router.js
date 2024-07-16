@@ -7,6 +7,7 @@ const userCtrl = require('../controllers/user.controller');
 // Ruta para obtener el user logueado
 router.post('/login', userCtrl.loginUser);
 
+
 // Ruta para actualizar el user desde profile
 router.put('/users/:user_id', userCtrl.updateUserProfile);
 
