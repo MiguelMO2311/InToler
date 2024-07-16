@@ -8,11 +8,11 @@ import Footer from './components/Footer';
 import { ToastContainer } from 'react-toastify';
 import { UserProvider } from './context/UserContext';
 import Pagina404 from './pages/ErrorPage404';
-import Reservation from './pages/Reservation';
-import Help from './pages/Help';
 import PublicRoutes from './components/PublicRoutes';
 import PrivateRoutes from './components/PrivateRoutes';
 import CardCreation from './pages/CardsPage';
+import AddCard from './pages/AddCard';
+import EditCard from './pages/EditCard';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <div style={{ flexGrow: 1 }}>
           <Routes>
             <Route path="/" element={<Navigate replace to="/home" />} />
-            {/* <Route path="/edit-book/:book_id" Component={EditBook} /> */}
+            <Route path="/edit-card/:card_id" Component={EditCard} />
 
             <Route path="*" element={<Pagina404 />} />
 
@@ -35,8 +35,8 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route path="/cardsPage" element={<CardCreation />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/addCard" element={<Reservation />} />
-              <Route path="/editCard" element={<Help />} />
+              <Route path="/addCard" element={<AddCard />} />
+              <Route path="/editCard" element={<EditCard />} />
             </Route>
           </Routes>
           <ToastContainer />

@@ -4,17 +4,15 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Esquema de validación para el formulario
 const cardSchema = z.object({
-
-  title: z.string().min(1, 'El título es requerido.'),
-  author: z.string().min(1, 'El autor es requerido.'),
-  photo: z.string().url('Debe ser una URL válida.'),
-  type: z.string().min(1, 'El tipo es requerido.'),
-  price: z.number().min(0, 'El precio es requerido.'),
+  allergies: z.string().min(1, 'Las alergias son requeridas.'),
+  allergiesImg: z.string().url('Debe ser una URL válida.'),
+  intolerances: z.string().min(1, 'Las intolerancias son requeridas.'),
+  intolerancesImg: z.string().url('Debe ser una URL válida.'),
 });
 
 // Tipo de datos para el formulario
@@ -23,8 +21,6 @@ type FormData = z.infer<typeof cardSchema>;
 const EditCard: React.FC = () => {
   const navigate = useNavigate();
   const { card_id } = useParams<{ card_id: string }>();
-  console.log(card_id);
-
 
   const {
     register,
@@ -39,129 +35,110 @@ const EditCard: React.FC = () => {
     const fetchCardData = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/cards/card/${card_id}`);
-        const { title, author, photo, type, price } = response.data;
-        setValue('title', title);
-        setValue('author', author);
-        setValue('photo', photo);
-        setValue('type', type);
-        setValue('price', price);
+        const { allergies, intolerances, allergiesImg, intolerancesImg } = response.data;
+        setValue('allergies', allergies);
+        setValue('intolerances', intolerances);
+        setValue('allergiesImg', allergiesImg);
+        setValue('intolerancesImg', intolerancesImg);
       } catch (error) {
-        console.error('Error al cargar los datos del libro:', error);
+        console.error('Error al cargar los datos de la tarjeta:', error);
       }
     };
 
     fetchCardData();
   }, [setValue, card_id]);
 
-
   const onSubmit = async (data: FormData) => {
-    console.log('onSubmit ejecutado', data);
     const updatedData = {
       ...data,
-      card_id: Number(data), // Convierte book_id a un número
-      price: parseFloat(data.price.toString()),
+      card_id: Number(card_id),
     };
-    console.log('Datos enviados:', updatedData);
 
     await axios.put(`http://localhost:3000/cards/card/${card_id}`, updatedData)
       .then(() => {
-        console.log('Tarjeta actualizada con éxito');
-        toast.success('Tarjete editada actualizada', { position: "top-center", autoClose: 2000 });
+        toast.success('Card actualizada correctamente', { position: "top-center", autoClose: 2000 });
         setTimeout(() => {
           navigate('/CardsPage');
         }, 3000);
       })
       .catch(error => {
         console.error('Error al actualizar la tarjeta:', error);
-        toast.error('Tarjeta editada NO actualizada', { position: "top-center", autoClose: 2000 });
+        toast.error('Hubo un error al actualizar la tarjeta', { position: "top-center", autoClose: 2000 });
       });
-
   };
-  return (
-    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_addCard.jpg')", backgroundSize: 'cover', maxHeight: "550px" }}>
-      <div className="flex justify-center items-start pt-5 my-5 border-dashed h-1/3">
-        <div className="w-2/3 shadow-md rounded px-8 pt-6 pb-8 mb-4  hover:bg-green-800 hover:bg-opacity-50 ">
-          <h1 className="text-2xl font-bold m-1 text-slate-800 hover:text-lime-200">Editar Tarjeta</h1>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                Título:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
-                id="title"
-                type="text"
-                {...register('title')}
-                placeholder="Introduce el título"
-              />
-              {errors.title && <p className="text-red-500 text-xs italic">{errors.title.message}</p>}
-            </div>
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="author">
-                Autor:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
-                id="author"
-                type="text"
-                {...register('author')}
-                placeholder="Introduce el autor"
-              />
-              {errors.author && <p className="text-red-500 text-xs italic">{errors.author.message}</p>}
-            </div>
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="type">
-                Tipo:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
-                id="type"
-                type="text"
-                {...register('type')}
-                placeholder="Introduce el tipo"
-              />
-              {errors.type && <p className="text-red-500 text-xs italic">{errors.type.message}</p>}
-            </div>
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
-                URL de la Foto:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
-                id="photo"
-                type="text"
-                {...register('photo')}
-                placeholder="Introduce la URL de la foto"
-              />
-              {errors.photo && <p className="text-red-500 text-xs italic">{errors.photo.message}</p>}
-            </div>
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-                Precio:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
-                id="price"
-                type="text"
-                {...register('price', {
-                  setValueAs: (value) => parseFloat(value) || 0, // Convierte el valor del input a un número flotante
-                })}
-                placeholder="Introduce el precio"
-              />
-              {errors.price && <p className="text-red-500 text-xs italic">{errors.price.message}</p>}
 
-              <button
-                className="bg-yellow-700 hover:bg-yellow-950 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline float-right mt-5"
-                type="submit"
-              >
-                Editar Tarjeta
-              </button>
-            </div>
-          </form>
+  return (
+    <div className="flex justify-center items-center flex-wrap "
+      style={{ backgroundImage: `url('/imgs/img_fondo_addBook.jpg')`, backgroundSize: 'cover' }}>
+      <ToastContainer />
+      <div key={card_id} className="m-8" style={{ width: '240px' }}>
+        <div className="flex flex-col items-center justify-center h-300">
+          <div className="flex flex-col items-center justify-center bg-yellow-200 shadow-lg rounded-full p-10" style={{ width: '33vw', height: '33vw' }}>
+            <h4 className="text-2xl text-blue-600 font-bold mt-4 py-6">Editar esta tarjeta:</h4>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+              <div className="mb-2">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="allergies">
+                  Alergia:
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
+                  id="allergies"
+                  type="text"
+                  {...register('allergies')}
+                  placeholder="Introduce las alergias"
+                />
+                {errors.allergies && <p className="text-red-500 text-xs italic">{errors.allergies.message}</p>}
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="allergiesImg">
+                  Imagen de la Alergia:
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
+                  id="allergiesImg"
+                  type="text"
+                  {...register('allergiesImg')}
+                  placeholder="Introduce imagen de la alergia"
+                />
+                {errors.allergiesImg && <p className="text-red-500 text-xs italic">{errors.allergiesImg.message}</p>}
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="intolerances">
+                  Intolerancia:
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
+                  id="intolerances"
+                  type="text"
+                  {...register('intolerances')}
+                  placeholder="Introduce las intolerancias"
+                />
+                {errors.intolerances && <p className="text-red-500 text-xs italic">{errors.intolerances.message}</p>}
+              </div>
+              <div className="mb-2">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="intolerancesImg">
+                  Imagen Intolerancia:
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none bg-green-100 hover:bg-white"
+                  id="intolerancesImg"
+                  type="text"
+                  {...register('intolerancesImg')}
+                  placeholder="Introduce la Imagen de la intolerancia"
+                />
+                {errors.intolerancesImg && <p className="text-red-500 text-xs italic">{errors.intolerancesImg.message}</p>}
+              </div>
+              <div className="flex items-center justify-between">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                  Guardar Cambios
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default EditCard;

@@ -64,7 +64,7 @@ const Profile: React.FC = () => {
       console.log('Contraseña cambiada con éxito:', response.data);
       alert('Cambiada contraseña con exito');
       setTimeout(() => {
-        navigate('/BooksPage');
+        navigate('/CardsPage');
       }, 1000);
     } catch (error) {
       console.error('Error al cambiar la contraseña:', error);
