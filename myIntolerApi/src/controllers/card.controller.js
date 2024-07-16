@@ -56,14 +56,14 @@ const getCardById = async (req, res) => {
 const updateCard = async (req, res) => {
   const { card_id } = req.params;
   console.log(`card_id recibido: ${card_id}`); // Imprime el card_id recibido
-  const { title, author, photo, type, price } = req.body;
-  console.log('Datos recibidos:', { title, author, photo, type, price });
+  const { allergies, allergiesImg, intolerances, intolerancesImg } = req.body;
+  console.log('Datos recibidos:', { allergies, allergiesImg, intolerances, intolerancesImg });
   const connection = await connectionPromise;
 
   try {
     const [results] = await connection.query(
-      'UPDATE cardcards SET title = ?, author = ?, photo = ?, type = ?, price = ? WHERE card_id = ?',
-      [title, author, photo, type, price, card_id]
+      'UPDATE cards SET allergies = ?, allergiesImg = ?, intolerances = ?, intolerancesImg = ? WHERE card_id = ?',
+      [allergies, allergiesImg, intolerances, intolerancesImg, card_id]
     );
     console.log('Resultados de la actualización:', results); // Imprime los resultados de la actualización
 
@@ -80,27 +80,31 @@ const updateCard = async (req, res) => {
 };
 
 
-
 // Función para añadir una nueva card
 const addCard = async (req, res) => {
-  const { user_id, title, author, type, photo, price } = req.body;
+  const { user_id, allergies, allergiesImg, intolerances, intolerancesImg } = req.body;
   const connection = await connectionPromise;
 
   try {
-    const [card] = await connection.query('SELECT * FROM cards WHERE title = ?', [title]);
-
-    if (card.length > 0) {
-      return res.status(409).send({ message: 'La card ya está registrada.' });
-    }
-
-    await connection.query(
-      'INSERT INTO cards (user_id, title, author, type, photo, price) VALUES (?, ?, ?, ?, ?, ?)',
-      [user_id, title, author, type, photo, price]
+    // Busca si ya existe una tarjeta con las mismas alergias e intolerancias para el mismo usuario
+    const [existingCard] = await connection.query(
+      'SELECT * FROM cards WHERE user_id = ? AND allergies = ? AND intolerances = ?',
+      [user_id, allergies, intolerances]
     );
 
-    res.status(201).send({ message: 'Card registrada con éxito.' });
+    if (existingCard.length > 0) {
+      return res.status(409).send({ message: 'El usuario ya tiene una tarjeta con estas alergias e intolerancias.' });
+    }
+
+    // Si no existe, añade la nueva tarjeta
+    await connection.query(
+      'INSERT INTO cards (user_id, allergies, allergiesImg, intolerances, intolerancesImg) VALUES (?, ?, ?, ?, ?)',
+      [user_id, allergies, allergiesImg, intolerances, intolerancesImg]
+    );
+
+    res.status(201).send({ message: 'Tarjeta registrada con éxito.' });
   } catch (error) {
-    res.status(500).send({ message: 'Error al registrar la Card', error });
+    res.status(500).send({ message: 'Error al registrar la tarjeta', error });
   }
 };
 
@@ -129,4 +133,4 @@ const deleteCard = async (req, res) => {
 
 
 
-  module.exports = {getCardsByUserId, updateCard, addCard, deleteCard }
+  module.exports = {getCardsByUserId, updateCard, addCard, deleteCard, getCardById }
