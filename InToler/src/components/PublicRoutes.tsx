@@ -6,7 +6,7 @@ function PublicRoutes() {
     //  const user = null
     if (user) return <Outlet />
 
-    return <Navigate to="booksPage" />
+    return <Navigate to="cardsPage" />
 
 }
 

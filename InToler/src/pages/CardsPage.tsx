@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,21 +32,21 @@ const CardsPage: React.FC = () => {
       const response = await axios.delete(`http://localhost:3000/card/${card_id}`);
 
       if (response.status !== 200) {
-        throw new Error('Error al eliminar el tarjeta');
+        throw new Error('Error al eliminar el libro');
       }
 
       setUserCards(prevCards => prevCards.filter(card => card.card_id !== card_id));
-      toast.success('Tarjeta eliminada correctamente', { position: "top-center", autoClose: 2000 });
+      toast.success('Libro eliminado correctamente', { position: "top-center", autoClose: 2000 });
     } catch (error) {
       console.error(error);
-      toast.error('Hubo un error al eliminar la tarjeta', { position: "top-center", autoClose: 2000 });
+      toast.error('Hubo un error al eliminar el libro', { position: "top-center", autoClose: 2000 });
     }
   };
 
 
   return (
     <div className="flex justify-center items-center flex-wrap "
-      style={{ backgroundImage: `url('/imgs/img_fondo_addCard.jpg')`, backgroundSize: 'cover' }}>
+      style={{ backgroundImage: `url('/imgs/img_fondo_addBook.jpg')`, backgroundSize: 'cover' }}>
       <ToastContainer />
       {userCards.map(card => (
         <div key={card.card_id} className="m-8" style={{ width: '240px' }}>
@@ -58,27 +58,32 @@ const CardsPage: React.FC = () => {
 }
 
 const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void }> = ({ card, handleDelete }) => {
+
   return (
-    <div className="flex flex-col bg-yellow-100 shadow-lg rounded-md overflow-hidden" style={{ height: '500px' }}>
-      <div className="h-[400px] flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url(${card.photo})` }}>
-      </div>
-      <div className="p-4 flex-grow h-24">
-        <h2 className="text-xl text-violet-600 font-bold">{card.name}</h2>
-        <p className="text-md text-indigo-600">{card.surname}</p>
-      </div>
-      <div className="flex justify-between items-center p-4 border-t">
-        <div className="text-lg font-bold">{card.foodPreferencies}</div>
-        <div className="text-lg font-bold">{card.allergies}</div>
-        <div className="text-lg font-bold">{card.intolerances}</div>
-        <div>
-          <FaPencilAlt className="inline-block text-lime-500 hover:text-yellow-500 cursor-pointer"
+    <div className="flex flex-col items-center justify-center h-300">
+      <div className="flex flex-col items-center justify-center bg-yellow-200 shadow-lg rounded-full p-10" style={{ width: '33vw', height: '33vw' }}>
+        <h2 className="text-2xl text-red-600 font-bold mb-4">Alergias e Intolerancias del usuario</h2>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex flex-col items-center">
+            <div className="rounded-full bg-cover bg-center mb-2" style={{ width: '10vw', height: '10vw', backgroundImage: `url(${card.allergiesImg})` }}></div>
+            <h3 className="text-xl text-violet-600 font-bold">{card.allergies}</h3>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="rounded-full bg-cover bg-center mb-2" style={{ width: '10vw', height: '10vw', backgroundImage: `url(${card.intolerancesImg})` }}></div>
+            <h3 className="text-xl text-violet-600 font-bold">{card.intolerances}</h3>
+          </div>
+        </div>
+        <div className="flex justify-center items-center w-full mt-20 space-x-24">
+          <FaPencilAlt className="inline-block text-red-500 hover:text-black cursor-pointer"
             onClick={() => window.location.href = `./edit-card/${card.card_id}`} />
-          <FaTrash className="inline-block text-red-700 hover:text-red-400 cursor-pointer ml-2"
+          <FaTrash className="inline-block text-red-700 hover:text-black cursor-pointer"
             onClick={() => handleDelete(card.card_id)} />
         </div>
       </div>
     </div>
   );
-};
+  
+  
+}
 
 export default CardsPage;

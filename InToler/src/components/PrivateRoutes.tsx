@@ -6,7 +6,7 @@ function PrivateRoutes() {
     //  const user = null
     if (user) return <Outlet />
 
-    return <Navigate to="login" />
+    return <Navigate to="logIn" />
 
 }
 

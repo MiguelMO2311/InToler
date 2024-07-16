@@ -10,7 +10,7 @@ type MenuProps = {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
+const LogOut: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
     const [user, setUser] = useState<unknown | null>(null);
 
     const toggleUser = () => {
@@ -24,10 +24,10 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
                     {user ? (
                         <>
                             <NavLink className="ml-8 text-blue-700 hover:text-blue-400" to="/Home" onClick={() => setIsOpen(false)}>Home</NavLink>
-                            <NavLink className="ml-8 text-red-700 hover:text-red-300" to="/BooksPage" onClick={() => setIsOpen(false)}>Books</NavLink>
+                            <NavLink className="ml-8 text-red-700 hover:text-red-300" to="/CardsPage" onClick={() => setIsOpen(false)}>Books</NavLink>
                             <NavLink className="ml-8 text-purple-700 hover:text-purple-300" to="/Profile" onClick={() => setIsOpen(false)}>Profile</NavLink>
-                            <NavLink className="ml-8 text-yellow-700 hover:text-yellow-300" to="/AddBook" onClick={() => setIsOpen(false)}>Add Book</NavLink>
-                            <NavLink className="ml-8 text-green-700 hover:text-green-300" to="/EditBook" onClick={() => setIsOpen(false)}>Edit Book</NavLink>
+                            <NavLink className="ml-8 text-yellow-700 hover:text-yellow-300" to="/AddCard" onClick={() => setIsOpen(false)}>Add Book</NavLink>
+                            <NavLink className="ml-8 text-green-700 hover:text-green-300" to="/EditCard" onClick={() => setIsOpen(false)}>Edit Book</NavLink>
                         </>
                     ) : (
                         <>
@@ -51,4 +51,4 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
 };
 
 
-export default Menu;
+export default LogOut;

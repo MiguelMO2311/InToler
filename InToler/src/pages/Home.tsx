@@ -68,7 +68,7 @@ function Home() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          'https://www.googleapis.com/books/v1/volumes?q=subject:"Restaurants"&maxResults=40'
+          'https://www.googleapis.com/books/v1/volumes?q=subject:"Food"&maxResults=40'
         );
         const items = response.data.items || [];
         const filteredItems = items.filter((book: Book) => {

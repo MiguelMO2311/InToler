@@ -33,7 +33,7 @@ function App() {
             </Route>
 
             <Route element={<PrivateRoutes />}>
-              <Route path="/cardCreation" element={<CardCreation />} />
+              <Route path="/cardsPage" element={<CardCreation />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/addCard" element={<Reservation />} />
               <Route path="/editCard" element={<Help />} />

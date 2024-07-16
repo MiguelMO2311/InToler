@@ -8,6 +8,8 @@ type User = {
     password: string;
     foodPreferencies: EnumValues;
     photo: string;
+    allergies: string;
+    intolerances:string;
 }
 
 export type { User };

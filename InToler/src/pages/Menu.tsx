@@ -11,9 +11,9 @@ type MenuProps = {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-interface Book {
+interface Card {
     volumeInfo: {
-        title: string;
+        name: string;
         imageLinks: {
             thumbnail: string;
         };
@@ -42,13 +42,13 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
     };
 
     const [isbn, setIsbn] = useState('');
-    const [book, setBook] = useState<Book | null>(null);
+    const [card, setCard] = useState<Card | null>(null);
 
-    const searchBook = async () => {
+    const searchCard = async () => {
         try {
-            const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+            const response = await axios.get(`https://www.googleapis.com/cards/v1/volumes?q=isbn:${isbn}`);
             if (response.data.items && response.data.items.length > 0) {
-                setBook(response.data.items[0]);
+                setCard(response.data.items[0]);
             }
         } catch (error) {
             console.error(error);
@@ -61,11 +61,11 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
                 <div className={`flex ${isOpen ? 'flex-col' : ''} justify-start`}>
                     <div className="mr-24 flex items-center rounded-md ">
                         <input type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} placeholder="  Busca por ISBN" className="rounded-lg w-44 text-center text-lime-600 font-light italic bg-green-800  hover:bg-white" />
-                        <button onClick={searchBook} className="ml-3"><SlMagnifier /></button>
+                        <button onClick={searchCard} className="ml-3"><SlMagnifier /></button>
                     </div>
-                    {book && isbn && (
-                        <a className='absolute top-0  left-[490px] w-[62px] hover:size-60 pt-1 ' href={book.volumeInfo.previewLink} target="_blank" rel="noopener noreferrer">
-                            <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
+                    {card && isbn && (
+                        <a className='absolute top-0  left-[490px] w-[62px] hover:size-60 pt-1 ' href={card.volumeInfo.previewLink} target="_blank" rel="noopener noreferrer">
+                            <img src={card.volumeInfo.imageLinks.thumbnail} alt={card.volumeInfo.name} />
                         </a>
                     )}
                     {user ? (

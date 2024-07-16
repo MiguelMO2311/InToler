@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
         console.log('Perfil actualizado con éxito:', response.data);
         alert('Usuario actualizado con éxito');
         setTimeout(() => {
-          navigate('/BooksPage');
+          navigate('/CardsPage');
         }, 1000);
       })
       .catch(error => {
