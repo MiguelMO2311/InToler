@@ -10,7 +10,7 @@ const Footer = () => {
 
 
     return (
-        <footer className="flex justify-around min-h-full p-8 bg-yellow-400  text-white font-semibold">
+        <footer className="flex justify-around min-h-full p-8 bg-yellow-100  text-white font-semibold">
             <a className="text-4xl hover:bg-yellow-500" href="https://www.linkedin.com/in/miguel-meneses-oliveros" target="_blank" rel="noopener noreferrer"><CiLinkedin /></a>
             <a className="text-4xl hover:bg-yellow-500" href="https://www.x.com" target="_blank" rel="noopener noreferrer"><AiFillTwitterSquare /></a>
             <a className="text-4xl hover:bg-yellow-500" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><BsInstagram /></a>

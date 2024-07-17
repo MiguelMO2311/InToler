@@ -58,9 +58,9 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
         <div className={className}>
             <nav className={`flex ${isOpen ? 'flex-col' : ''} justify-start items-center px-4 text-xl`}>
                 <div className={`flex ${isOpen ? 'flex-col' : ''} justify-start`}>
-                <div className="mr-24 flex items-center rounded-md ">
-                <input type="text" value={ciudad} onChange={(e) => setCiudad(e.target.value)} placeholder="  Busca Restaurante" className="rounded-lg w-44 text-center text-black font-light italic bg-yellow-300  hover:bg-white" />
-                <button onClick={buscarRestaurantes} className="ml-3"><SlMagnifier /></button>
+                <div className="mr-24 flex items-center rounded-md">
+                <input type="text" value={ciudad} onChange={(e) => setCiudad(e.target.value)} placeholder="Busca tú Restaurante" className="rounded-lg  w-44 text-center text-yellow-950 font-light italic bg-yellow-100  hover:bg-white" />
+                <button onClick={buscarRestaurantes} className="ml-3 text-yellow-950 border-yellow-900"><SlMagnifier /></button>
             </div>
             {restaurante && ciudad && (
                 <a className='absolute top-0  left-[490px] w-[62px] hover:size-60 pt-1 ' href={restaurante.info.previewLink} target="_blank" rel="noopener noreferrer">
@@ -82,9 +82,9 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
                     ) : (
                         <>
                             {/* Enlaces para usuario no logueado */}
-                            <NavLink className="ml-8 text-yellow-600 hover:text-white" to="/Home" onClick={() => setIsOpen(false)}>Home</NavLink>
-                            <NavLink className="ml-8 text-yellow-600 hover:text-white" to="/Register" onClick={() => setIsOpen(false)}>Register</NavLink>
-                            <button onClick={handleLogin} className="flex items-center ml-16 text-white hover:bg-yellow-500 hover:text-black focus:outline-none border-2 border-yellow-700 rounded-lg p-1 transition-colors duration-200 "> <AiOutlineUserAdd size={20} color="white" />
+                            <NavLink className="ml-8 text-yellow-600 hover:text-black" to="/Home" onClick={() => setIsOpen(false)}>Home</NavLink>
+                            <NavLink className="ml-8 text-yellow-600 hover:text-black" to="/Register" onClick={() => setIsOpen(false)}>Register</NavLink>
+                            <button onClick={handleLogin} className="flex items-center ml-16 text-yellow-700 hover:bg-yellow-500 hover:text-black focus:outline-none border-2 border-yellow-700 rounded-lg p-1 transition-colors duration-200 "> <AiOutlineUserAdd size={20} color="" />
                                 <span className="text-xs ml-1">Log In</span>
                             </button>
 

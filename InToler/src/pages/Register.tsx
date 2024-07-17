@@ -106,7 +106,7 @@ const Register: React.FC = () => {
   
 
   return (
-    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_register.jpg')", backgroundSize: "45%", maxHeight: "640px" }}>
+    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_register.jpg')", backgroundSize: "cover", maxHeight: "670px" }}>
       <div className="flex justify-center items-start border-dashed py-10">
         <div className="w-1/3 shadow-md rounded px-8 py-4 hover:bg-yellow-600 hover:bg-opacity-50 ">
           <h1 className="text-2xl font-bold mb-1 text-white hover:text-black">Regístrate</h1>

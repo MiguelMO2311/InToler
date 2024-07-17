@@ -29,7 +29,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="relative max-h-28 p-3 bg-yellow-400 font-semibold flex justify-between items-center w-full">
+            <header className="relative max-h-28  bg-yellow-100 font-semibold flex justify-between items-center w-full">
                 <Logo />
                 <button
                     className="md:hidden"

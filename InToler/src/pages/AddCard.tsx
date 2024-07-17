@@ -60,9 +60,9 @@ const AddCard: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center flex-wrap "
-      style={{ backgroundImage: `url('/imgs/img_fondo_addBook.jpg')`, backgroundSize: 'cover' }}>
+      style={{ backgroundImage: `url('/imgs/img_fondo_addCard.jpg')`, backgroundSize: '40%', maxHeight: "640px"  }}>
       <ToastContainer />
-      <div className="m-8" style={{ width: '240px' }}>
+      <div className="m-10" style={{ width: '240px' }}>
         <div className="flex flex-col items-center justify-center h-300">
           <div className="flex flex-col items-center justify-center bg-yellow-200 shadow-lg rounded-full p-10" style={{ width: '33vw', height: '33vw' }}>
             <h4 className=" text-blue-600 font-bold my-4 ">Añadir nueva tarjeta:</h4>

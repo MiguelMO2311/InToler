@@ -40,7 +40,7 @@ function AnimatedTitle() {
 function Logo() {
   return (
     <div className="flex start-2 justify-start w-px-4 items-center h-20">
-      <img src="/public/Logo.jpg" alt="logo" width={100} height={30} />
+      <img src="/public/Logo.jpg" alt="logo" width={86}  />
       <div className="text-3xl font-extrabold text-black hover:text-red-500, bg-transparent">
         <AnimatedTitle /> {/* Agrega el componente AnimatedTitle */}
       </div>

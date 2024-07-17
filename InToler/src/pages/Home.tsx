@@ -13,6 +13,11 @@ interface Book {
   };
 }
 
+interface BookPosition {
+  x: number;
+  y: number;
+}
+
 function Home() {
   const [showTitle, setShowTitle] = useState(true);
   const colors = ['green', 'white', 'goldenrod'];
@@ -20,24 +25,52 @@ function Home() {
   const [books, setBooks] = useState<JSX.Element[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const bookWidth = 60; // Define el ancho del libro
+  const bookHeight = 70; // Define la altura del libro
+
   useEffect(() => {
     const interval = setInterval(() => {
       setShowTitle((show) => !show);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+  const minMargin = 20; // Define el margen mínimo entre los libros
 
+  const checkOverlap = (newBook: BookPosition, existingBooks: BookPosition[]) => {
+    for (let i = 0; i < existingBooks.length; i++) {
+      const existingBook = existingBooks[i];
+      if (Math.abs(newBook.x - existingBook.x) < bookWidth + minMargin && Math.abs(newBook.y - existingBook.y) < bookHeight + minMargin) {
+        return true;
+      }
+    }
+    return false;
+  };
+  
   const generateBooks = (books: Book[]) => {
     const bookElements: JSX.Element[] = [];
     const offsetWidth = homeRef.current?.offsetWidth ?? 0;
     const offsetHeight = homeRef.current?.offsetHeight ?? 0;
     const headerHeight = 200;
+    const placedBooks: BookPosition[] = [];
 
     for (let i = 0; i < books.length; i++) {
       const book = books[i];
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const x = Math.random() * (offsetWidth - 2);
-      const y = Math.random() * (offsetHeight - headerHeight) + headerHeight;
+      let x, y;
+      let attempts = 0;
+      do {
+        x = Math.random() * (offsetWidth - 2 - 300) + 150;
+        y = Math.random() * (offsetHeight - headerHeight - 200) + headerHeight + 100;
+        attempts++;
+      } while (checkOverlap({x, y}, placedBooks) && attempts < 50);
+
+      if (attempts >= 50) {
+        console.log('No se pudo encontrar una posición no superpuesta para el libro:', book);
+        continue;
+      }
+
+      placedBooks.push({x, y});
+
       bookElements.push(
         <span
           key={i}
@@ -93,8 +126,8 @@ function Home() {
       style={{
         backgroundImage:
           "url('/imgs/img_fondo_home.jpg')",
-        backgroundSize: '40%',
-        maxHeight: '640px',
+        backgroundSize: '100%',
+        maxHeight: '670px',
       }}
     >
       {showTitle && (

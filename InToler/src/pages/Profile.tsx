@@ -74,7 +74,7 @@ const Profile: React.FC = () => {
 
 
   return (
-    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_profile.jpg')", backgroundSize: 'cover', maxHeight: "550px" }}>
+    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_profile.jpg')", backgroundSize: '50%', maxHeight: "550px" }}>
       <div className="flex justify-center items-start pt-10 border-dashed ">
         <div className="w-5/6 shadow-md rounded px-8 pt-6 pb-8 mb-4 hover:bg-green-800 hover:bg-opacity-40 flex">
           <div className="w-1/5 pt-12">

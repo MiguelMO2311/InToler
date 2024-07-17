@@ -61,7 +61,7 @@ const Menu: React.FC<MenuProps> = ({ className, isOpen, setIsOpen }) => {
                 <div className={`flex ${isOpen ? 'flex-col' : ''} justify-start`}>
                     <div className="mr-24 flex items-center rounded-md ">
                         <input type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} placeholder="  Busca por ISBN" className="rounded-lg w-44 text-center text-lime-600 font-light italic bg-green-800  hover:bg-white" />
-                        <button onClick={searchCard} className="ml-3"><SlMagnifier /></button>
+                        <button onClick={searchCard} className="ml-3"><SlMagnifier  /></button>
                     </div>
                     {card && isbn && (
                         <a className='absolute top-0  left-[490px] w-[62px] hover:size-60 pt-1 ' href={card.volumeInfo.previewLink} target="_blank" rel="noopener noreferrer">
