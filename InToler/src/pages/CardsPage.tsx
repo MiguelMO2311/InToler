@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const CardsPage: React.FC = () => {
   const [userCards, setUserCards] = useState<Card[]>([]);
 
-
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
     if (userInfo.user_id === undefined || isNaN(Number(userInfo.user_id))) {
@@ -46,11 +45,11 @@ const CardsPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-around items-center flex-wrap"
-      style={{ backgroundImage: `url('/imgs/img_fondo_cardsPage.jpg')`, backgroundSize: 'cover', maxHeight: "640px"  }}>
+    <div className="flex justify-center items-center flex-wrap "
+      style={{ backgroundImage: `url('/imgs/img_fondo_cardsPage.jpg')`, backgroundSize: 'cover', height: '670px'  }}>
       <ToastContainer />
       {userCards.map(card => (
-        <div key={card.card_id} className="m-20" style={{ width: '204px' }}>
+        <div key={card.card_id} className="mx-40" style={{ width: '204px' }}>
           <TarjetCard card={card} handleDelete={handleDelete} />
         </div>
       ))}
@@ -62,9 +61,9 @@ const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center align-middle">
-      <div className="relative flex flex-col items-center justify-center bg-yellow-800 bg-opacity-40 shadow-lg rounded-full p-8" style={{ width: '28.05vw', height: '28.05vw'}}>
-        <div className="flex flex-col items-center justify-center bg-yellow-100 bg-opacity-10 shadow-lg rounded-full p-4" style={{ width: '23.8vw', height: '23.8vw'}}>
+    <div className="flex flex-col items-center justify-center align-middle self-center">
+      <div className="relative flex flex-col items-center justify-center bg-yellow-100 bg-opacity-80 shadow-lg rounded-full p-8" style={{ width: '28.05vw', height: '28.05vw'}}>
+        <div className="flex flex-col items-center justify-center bg-yellow-100 bg-opacity-70 shadow-lg rounded-full p-4" style={{ width: '23.8vw', height: '23.8vw'}}>
           <h4 className=" text-blue-600 font-bold m-4 ">Este usuario tiene alergia e intolerancia a:</h4>
           <div className="flex items-center justify-between w-full">
             <div className="flex flex-col items-center">

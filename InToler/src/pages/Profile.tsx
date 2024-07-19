@@ -74,15 +74,15 @@ const Profile: React.FC = () => {
 
 
   return (
-    <div className="bg-cover bg-center h-screen transition-all duration-1000" style={{ backgroundImage: "url('/imgs/img_fondo_profile.jpg')", backgroundSize: '50%', maxHeight: "550px" }}>
+    <div className="bg-cover bg-center h-screen transition-all duration-1000 mr-12" style={{ backgroundImage: "url('/imgs/img_fondo_profile.jpg')", backgroundSize: '50%', maxHeight: "650px" }}>
       <div className="flex justify-center items-start pt-10 border-dashed ">
-        <div className="w-5/6 shadow-md rounded px-8 pt-6 pb-8 mb-4 hover:bg-green-800 hover:bg-opacity-40 flex">
-          <div className="w-1/5 pt-12">
+        <div className="w-full shadow-md rounded px-20 pt-6 pb-8 mb-4 hover:bg-green-800 hover:bg-opacity-40 flex">
+          <div className="w-1/5 pt-12 mr-12">
             <img src={userInfo.photo} alt="User" style={{ width: '90%', height: '84%', borderRadius: '5%' }} />
             <div className="flex justify-center mt-5">
             </div>
           </div>
-          <div className="w-3/5 ml-2 pr-5">
+          <div className="w-3/5 ml-36 pr-5">
             <h1 className="text-2xl font-bold mb-3 text-slate-800 hover:text-slate-400">Perfil</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="mb-4">
@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
                 {errors.email && <p className="text-red-500 text-xs italic">{errors.email.message}</p>}
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
+                <label className="block text-gray-700 text-sm font-bold mb-2 " htmlFor="photo">
                   Foto:
                 </label>
                 <input
@@ -146,7 +146,7 @@ const Profile: React.FC = () => {
               </div>
             </form>
           </div>
-          <div className="w-1/5 ml-4  hover:bg-green-800 hover:bg-opacity-50 ">
+          <div className="w-1/5 ml-40 hover:bg-green-800 hover:bg-opacity-50 ">
             <h2 className="text-xl font-bold mb-4 text-slate-800 hover:text-slate-400">Cambiar contraseña</h2>
             <form onSubmit={handleSubmitPassword(onSubmitPassword)} className="space-y-6">
               <div className="mb-4">
