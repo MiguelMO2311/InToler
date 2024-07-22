@@ -64,8 +64,8 @@ const AddCard: React.FC = () => {
       <ToastContainer />
       <div className="mx-32" style={{ width: '204px' }}>
         <div className="flex flex-col items-center justify-center align-middle self-center">
-          <div className="relative flex flex-col items-center justify-center bg-yellow-100 bg-opacity-80 shadow-lg rounded-full p-8" style={{ width: '28.05vw', height: '28.05vw'}}>
-            <div className="flex flex-col items-center justify-center bg-yellow-100 bg-opacity-70 shadow-lg rounded-full p-4" style={{ width: '23.8vw', height: '23.8vw'}}>
+          <div className="relative flex flex-col items-center justify-center bg-yellow-100 bg-opacity-80 shadow-lg rounded-full p-8" style={{ width: '38.05vw', height: '38.05vw'}}>
+            <div className="flex flex-col items-center justify-center bg-yellow-100 bg-opacity-70 shadow-lg rounded-full p-4" style={{ width: '27.8vw', height: '27.8vw'}}>
               <h4 className=" text-blue-600 font-bold m-2 ">Añadir nueva tarjeta:</h4>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-1">
                 <div className="">

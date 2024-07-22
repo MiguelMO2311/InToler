@@ -62,7 +62,7 @@ const TarjetCard: React.FC<{ card: Card, handleDelete: (card_id: number) => void
 
   return (
     <div className="flex flex-col items-center justify-center align-middle self-center">
-      <div className="relative flex flex-col items-center justify-center bg-yellow-100 bg-opacity-80 shadow-lg rounded-full p-8" style={{ width: '28.05vw', height: '28.05vw'}}>
+      <div className="relative flex flex-col items-center justify-center bg-yellow-100 bg-opacity-80 shadow-lg rounded-full p-8" style={{ width: '30.05vw', height: '30.05vw'}}>
         <div className="flex flex-col items-center justify-center bg-yellow-100 bg-opacity-70 shadow-lg rounded-full p-4" style={{ width: '23.8vw', height: '23.8vw'}}>
           <h4 className=" text-blue-600 font-bold m-4 ">Este usuario tiene alergia e intolerancia a:</h4>
           <div className="flex items-center justify-between w-full">
